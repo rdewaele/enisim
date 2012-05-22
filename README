@@ -1,0 +1,48 @@
+0.Copyright notice.
+-------------------
+Copyright (C) 2012 Robrecht Dewaele
+
+This file is part of enisim.
+
+enisim is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+enisim is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with enisim. If not, see <http://www.gnu.org/licenses/>.
+
+1. What is enisim?
+-----------------
+Enisim's goal is to emulate the encryption schemes used by the Enigma family of
+rotor machines.
+
+2. Usage.
+---------
+2.1 Starting up.
+----------------
+When enisim is started without any commandline options, it will run in its
+interactive mode. Follow the instructions that appear on the screen.
+
+-!- Not yet implemented -!-
+Over time, enisim will also have a non-interactive mode. This feature is on
+the todo list.
+
+2.2 Getting help.
+-----------------
+enisim --help should tell you everything about the enisim options.
+The list shown by the help function will always be up to date, whereas
+this read-me file might limp a little bit behind.
+
+Currently enisim supports configuring the following properties through
+command-line options (default in brackets):
+
+The other switches are for:
+	- help (-?, --help);
+	- usage (--usage);
+	- version and copyright information (-v, --version).
