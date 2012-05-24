@@ -5,3 +5,6 @@ make.depend
 
 # compiled object files
 *.o
+
+# vim swap files
+*.swp
