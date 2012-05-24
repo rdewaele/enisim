@@ -26,29 +26,6 @@
 // remember:
 // * explicitely uninitialized fields are initialized with zero
 // * 'char foo[3] = "FOO";' is somewhat esoteric, but valid standard C
-static const struct enigmaRotor_old const enigmaRotors_old[] = {
-	[I]      = {"Walze I",             "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q"},
-	[II]     = {"Walze II",            "AJDKSIRUXBLHWTMCQGZNPYFVOE", "E"},
-	[III]    = {"Walze III",           "BDFHJLCPRTXVZNYEIWGAKMUSQO", "V"},
-	[IV]     = {"Walze IV",            "ESOVPZJAYQUIRHXLNFTGKDCMWB", "J"},
-	[V]      = {"Walze V",             "VZBRGITYUPSDNHLXAWMJQOFECK", "Z"},
-	[VI]     = {"Walze VI",            "JPGVOUMFYQBENHZRDKASXLICTW", "MZ"},
-	[VII]    = {"Walze VII",           "NZJHGRCXMYSWBOUFAIVLPEKQDT", "MZ"},
-	[VIII]   = {"Walze VIII",          "FKQHTLXOCBJSPDZRAMEWNIUYGV", "MZ"},
-	[BETA]   = {"Walze Beta",          "LEYJVCNIXWPBQMDRTAKZGFUHOS"},
-	[GAMMA]  = {"Walze Gamma",         "FSOKANUERHMBTIYCWLQPZXVGJD"},
-	[UKW_B]  = {"Umkehrwalze B",       "YRUHQSLDPXNGOKMIEBFZCWVJAT"},
-	[UKW_C]  = {"Umkehrwalze C",       "FVPJIAOYEDRZXWGCTKUQSBNMHL"},
-	[UKW_BT] = {"Umkehrwalze B, thin", "ENKQAUYWJICOPBLMDXZVFTHRGS"},
-	[UKW_CT] = {"Umkehrwalze C, thin", "RDOBJNTKVEHMLFCWZAXGYIPSUQ"},
-	/* The Steckerbrett is technically not a rotor, but it can perfectly be
-	 * modelled as one: it does not rotate, but the wirings can be modified.
-	 * Note that the Steckerbrett does not translate characters by default
-	 * (no cables). For consistency with the other representations, it is still
-	 * manually initialized. I double-checked it for errors, I promise! */
-	[SB]     = {"Steckerbrett",        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
-};
-
 static const struct enigmaRotor const enigmaRotors[] = {
 	[I] = 
 	{"Walze I",
@@ -122,11 +99,23 @@ void printEnigmaRotors(void) {
 		struct enigmaRotor cur = selectEnigmaRotor(r);
 		printf("%s:\n", cur.name);
 		for (int c = 0; c < ER_ABC_SZ; ++c) {
-			printf("%c-%c\n", ((c + cur.wiring[c]) % ER_ABC_SZ) + 'A', c + 'A');
+			printf("%c-%c-%c\n",
+					((c + cur.wiring[c]) % ER_ABC_SZ) + 'A',
+					c + 'A',
+					((c - cur.wiring_inv[c] + ER_ABC_SZ) % ER_ABC_SZ) + 'A'
+					);
 		}
 	}
 }
 
+static inline void invertEnigmaRotor(unsigned *, unsigned *);
+static inline void invertEnigmaRotor(unsigned * in, unsigned * out) {
+	for (int i = 0; i < ER_ABC_SZ; ++i)
+		out[(i + in[i]) % ER_ABC_SZ] = in[i];
+}
+
 struct enigmaRotor selectEnigmaRotor(enum rotorID ID) {
-	return enigmaRotors[ID];
+	struct enigmaRotor template = enigmaRotors[ID];
+	invertEnigmaRotor(template.wiring, template.wiring_inv);
+	return template;
 }

@@ -26,26 +26,12 @@ enum rotorID {
 // Structure to represent an Enigma rotor and its state
 // (this structure assumes that input and output alphabets are of equal size)
 #define ER_ABC_SZ 26
-struct enigmaRotor_old {
-	// name to identify this rotor to the end user
-	const char * name;
-	// target alphabet in the alphabetical order of the source characters
-	char wiring[ER_ABC_SZ];
-	// turnover: represents ring character, i.e. index in the wiring table
-	// (Walzes 6, 7 and 8 have two turnovers, anything else none or just one)
-	char turnover[2];
-	// rotation step of the rotor (0 - 25)
-	unsigned rotation;
-	// position of the ring (important for turnovers) (0 - 25)
-	unsigned ringpos;
-
-	// inverse of the wiring table (calculated from the regular wiring)
-	char wiring_inv[ER_ABC_SZ];
-};
-
 struct enigmaRotor {
 	const char * name;
+	// name to identify this rotor to the end user
 	unsigned wiring[ER_ABC_SZ];
+	unsigned wiring_inv[ER_ABC_SZ];
+	unsigned rotation;
 };
 
 void printEnigmaRotors(void);

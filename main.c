@@ -22,17 +22,19 @@
 
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char * argv[]) {
 	struct enigma_I e1;
-	struct enigma_M4 em4;
+	//struct enigma_M4 em4;
 
 	e1 = makeEnigma_I(UKW_B, I, II, III);
-	em4 = makeEnigma_M4(UKW_B, BETA, I, II, III);
+	//em4 = makeEnigma_M4(UKW_B, BETA, I, II, III);
 
 	puts("Welcome to enisim v0.1");
 
-	printEnigmaRotors();
+	//printEnigmaRotors();
 
-	printf("Enigma I:  'A' => '%c'\n", enigma_I_encode('A', e1));
-	printf("Enigma M4: 'A' => '%c'\n", enigma_M4_encode('A', em4));
+	for (int i = 0; i < 26; ++i)
+		printf("Enigma I:  'A' => '%c'\n", enigma_I_encode('A', &e1));
+
+	//printf("Enigma M4: 'A' => '%c'\n", enigma_M4_encode('A', &em4));
 
 	return 0;
 }

@@ -47,5 +47,5 @@ struct enigma_M4 {
 struct enigma_I makeEnigma_I(enum rotorID, enum rotorID, enum rotorID, enum rotorID);
 struct enigma_M4 makeEnigma_M4(enum rotorID, enum rotorID, enum rotorID, enum rotorID, enum rotorID);
 
-char enigma_I_encode(char, struct enigma_I);
-char enigma_M4_encode(char, struct enigma_M4);
+char enigma_I_encode(char, struct enigma_I *);
+char enigma_M4_encode(char, struct enigma_M4 *);
