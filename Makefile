@@ -60,6 +60,9 @@ test: $(EXECUTABLE)
 grind: $(EXECUTABLE)
 	valgrind -v --leak-check=full --show-reachable=yes ./$<
 
+gdb: $(EXECUTABLE)
+	gdb $<
+
 clean:
 	@rm -f $(OBJECTS) $(EXECUTABLE) $(MAIN)
 
