@@ -42,7 +42,7 @@ CWARNINGS=-W -Wall -Wextra -Wundef -Wendif-labels -Wshadow\
 CFLAGS:=-g -O0 -pipe -pedantic -std=c99 -D_POSIX_C_SOURCE=200809L\
         $(CWARNINGS) $(CFLAGS)
 LDLIBS=
-SOURCES=main.c rotors.c
+SOURCES=main.c rotors.c enigma.c
 OBJECTS=$(SOURCES:.c=.o)
 MAIN=main
 EXECUTABLE=enisim

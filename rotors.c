@@ -23,33 +23,18 @@
 
 #include <stdio.h>
 
-// Structure to represent an Enigma rotor and its state
-struct enigmaRotor {
-	// name to identify this rotor to the end user
-	const char * name;
-	// target alphabet in the alphabetical order of the source characters
-	char wiring[26];
-	// rotation step of the rotor (0 - 25)
-	unsigned rotation;
-	// position of the ring (0 - 25)
-	unsigned ringpos;
-};
-
 // remember:
 // * explicitely uninitialized fields are initialized with zero
 // * 'char foo[3] = "FOO";' is somewhat esoteric, but valid standard C
-typedef enum rotorID {
-	I,II,III,IV,V,VI,VII,VIII,BETA,GAMMA,UKW_B,UKW_C,UKW_BT,UKW_CT,SB
-} rotorID;
 static const struct enigmaRotor const enigmaRotors[] = {
-	[I]      = {"Walze I",             "EKMFLGDQVZNTOWYHXUSPAIBRCJ"},
-	[II]     = {"Walze II",            "AJDKSIRUXBLHWTMCQGZNPYFVOE"},
-	[III]    = {"Walze III",           "BDFHJLCPRTXVZNYEIWGAKMUSQO"},
-	[IV]     = {"Walze IV",            "ESOVPZJAYQUIRHXLNFTGKDCMWB"},
-	[V]      = {"Walze V",             "VZBRGITYUPSDNHLXAWMJQOFECK"},
-	[VI]     = {"Walze VI",            "JPGVOUMFYQBENHZRDKASXLICTW"},
-	[VII]    = {"Walze VII",           "NZJHGRCXMYSWBOUFAIVLPEKQDT"},
-	[VIII]   = {"Walze VIII",          "FKQHTLXOCBJSPDZRAMEWNIUYGV"},
+	[I]      = {"Walze I",             "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q"},
+	[II]     = {"Walze II",            "AJDKSIRUXBLHWTMCQGZNPYFVOE", "E"},
+	[III]    = {"Walze III",           "BDFHJLCPRTXVZNYEIWGAKMUSQO", "V"},
+	[IV]     = {"Walze IV",            "ESOVPZJAYQUIRHXLNFTGKDCMWB", "J"},
+	[V]      = {"Walze V",             "VZBRGITYUPSDNHLXAWMJQOFECK", "Z"},
+	[VI]     = {"Walze VI",            "JPGVOUMFYQBENHZRDKASXLICTW", "MZ"},
+	[VII]    = {"Walze VII",           "NZJHGRCXMYSWBOUFAIVLPEKQDT", "MZ"},
+	[VIII]   = {"Walze VIII",          "FKQHTLXOCBJSPDZRAMEWNIUYGV", "MZ"},
 	[BETA]   = {"Walze Beta",          "LEYJVCNIXWPBQMDRTAKZGFUHOS"},
 	[GAMMA]  = {"Walze Gamma",         "FSOKANUERHMBTIYCWLQPZXVGJD"},
 	[UKW_B]  = {"Umkehrwalze B",       "YRUHQSLDPXNGOKMIEBFZCWVJAT"},
@@ -76,6 +61,6 @@ void printEnigmaRotors(void) {
 	}
 }
 
-char enigmaEncode(char c, rotorID * rotors, size_t num_rotors) {
-	return c;
+struct enigmaRotor selectEnigmaRotor(enum rotorID ID) {
+	return enigmaRotors[ID];
 }
