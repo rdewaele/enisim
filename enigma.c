@@ -18,6 +18,8 @@
 #include "enigma.h"
 #include "rotors.h"
 
+#include <stdio.h>
+
 struct enigma_I makeEnigma_I(enum rotorID ukw, enum rotorID i, enum rotorID ii, enum rotorID iii) {
 	return (struct enigma_I) {
 		selectEnigmaRotor(ukw),
@@ -39,26 +41,38 @@ struct enigma_M4 makeEnigma_M4(enum rotorID ukw, enum rotorID ag, enum rotorID i
 	};
 }
 
+
 char enigma_I_encode(char c, struct enigma_I e) {
+	/*
 	// input passes the following components in order:
 	// input ->| Steckerbrett (SB), rightmost Walze (RW), middle Walze (MW),
 	// leftmost Walze (LW), Umkehrwalze, LW, MW, RW, SB |-> output
-	c = e.SB.wiring[c];
+	c = e.sb.wiring[c - 'A'];
+	printf("SB: %c\n", c);
 	// first rotate, then keypress
 	// TODO implement turnover logic
-	e.III.rotation = (e.III.rotation + 1) % 25; //TODO move magic numbers to struct enigmaRotor
+	e.walze3.rotation = (e.walze3.rotation + 1) % ER_ABC_SZ;
 	// TODO maybe modify enigma struct to simple array (do rotations first)
-	c = e.III.wiring[e.III.rotation];
-	c = e.II.wiring[e.II.rotation];
-	c = e.I.wiring[e.I.rotation];
+	c = e.walze3.wiring[c - 'A'];
+	printf("W3: %c\n", c);
+	c = e.walze2.wiring[c - 'A'];
+	printf("W2: %c\n", c);
+	c = e.walze1.wiring[c - 'A'];
+	printf("W1: %c\n", c);
 
-	c = e.UKW.wiring[c];
+	c = e.ukw.wiring[c - 'A'];
+	printf("UKW: %c\n", c);
 
-	// TODO adjust data structure to make this work, i.e. calculate the inverse
-	c = e.I.wiring[e.I.rotation];
-	c = e.II.wiring[e.II.rotation];
-	c = e.III.wiring[e.III.rotation];
+	c = e.walze1.wiring_inv[c - 'A'];
+	printf("W1: %c\n", c);
+	c = e.walze2.wiring_inv[c - 'A'];
+	printf("W2: %c\n", c);
+	c = e.walze3.wiring_inv[c - 'A'];
+	printf("W3: %c\n", c);
 
+	c = e.sb.wiring[c - 'A'];
+	printf("SB: %c\n", c);
+*/
 	return c;
 }
 

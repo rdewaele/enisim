@@ -23,11 +23,11 @@
 // reflectors (UKW B or UKW C), and 3 out of 5 possible rotors (I to V).
 // As it was a military enigma, it also featured a Steckerbrett.
 struct enigma_I {
-	struct enigmaRotor UKW;
-	struct enigmaRotor I;
-	struct enigmaRotor II;
-	struct enigmaRotor III;
-	struct enigmaRotor SB;
+	struct enigmaRotor ukw;
+	struct enigmaRotor walze1;
+	struct enigmaRotor walze2;
+	struct enigmaRotor walze3;
+	struct enigmaRotor sb;
 };
 
 // The Enigma M4 was used by the Kriegsmarine. It had 1 out of 2 possible
@@ -36,12 +36,12 @@ struct enigma_I {
 // Note that the 3 additional rotors, compared to the Enigma I, all have
 // two notches instead of only one.
 struct enigma_M4 {
-	struct enigmaRotor UKW;
-	struct enigmaRotor AG;
-	struct enigmaRotor I;
-	struct enigmaRotor II;
-	struct enigmaRotor III;
-	struct enigmaRotor SB;
+	struct enigmaRotor ukw;
+	struct enigmaRotor ag;
+	struct enigmaRotor walze1;
+	struct enigmaRotor walze2;
+	struct enigmaRotor walze3;
+	struct enigmaRotor sb;
 };
 
 struct enigma_I makeEnigma_I(enum rotorID, enum rotorID, enum rotorID, enum rotorID);

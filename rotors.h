@@ -18,14 +18,15 @@
 #pragma once
 
 enum rotorID {
-	I,II,III,IV,V,VI,VII,VIII,BETA,GAMMA,UKW_B,UKW_C,UKW_BT,UKW_CT,SB
+	I, II, III, IV, V, VI, VII, VIII, BETA, GAMMA, UKW_B, UKW_C, UKW_BT, UKW_CT,
+	SB, ROTOR_IDS
 };
 
 // TODO further disambiguate and clarify what the wiring arrays exactly mean
 // Structure to represent an Enigma rotor and its state
 // (this structure assumes that input and output alphabets are of equal size)
 #define ER_ABC_SZ 26
-struct enigmaRotor {
+struct enigmaRotor_old {
 	// name to identify this rotor to the end user
 	const char * name;
 	// target alphabet in the alphabetical order of the source characters
@@ -38,10 +39,14 @@ struct enigmaRotor {
 	// position of the ring (important for turnovers) (0 - 25)
 	unsigned ringpos;
 
-	// inverse of the wiring table (can be calculated)
+	// inverse of the wiring table (calculated from the regular wiring)
 	char wiring_inv[ER_ABC_SZ];
 };
 
+struct enigmaRotor {
+	const char * name;
+	unsigned wiring[ER_ABC_SZ];
+};
 
 void printEnigmaRotors(void);
 
