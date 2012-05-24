@@ -2,7 +2,6 @@
 enisim
 main
 make.depend
-tags
 
 # compiled object files
 *.o

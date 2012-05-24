@@ -47,7 +47,7 @@ OBJECTS=$(SOURCES:.c=.o)
 MAIN=main
 EXECUTABLE=enisim
 
-all: $(EXECUTABLE) tags
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(MAIN)
 	cp $< $@
@@ -57,9 +57,6 @@ $(MAIN): $(OBJECTS)
 test: $(EXECUTABLE)
 	./$<
 
-tags: *.c *.h
-	ctags $^
-
 grind: $(EXECUTABLE)
 	valgrind -v --leak-check=full --show-reachable=yes ./$<
 
@@ -67,7 +64,7 @@ clean:
 	@rm -f $(OBJECTS) $(EXECUTABLE) $(MAIN)
 
 mrproper: clean
-	@rm -f .ctags tags make.depend
+	@rm -f  make.depend
 
 .PHONY: all grind clean mrproper
 
